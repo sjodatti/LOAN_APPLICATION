@@ -28,7 +28,7 @@ class TabsComp extends PureComponent {
         }
     }
     handleChange = (event, newValue) => {
-        this.setState({ value: newValue });
+        this.setState({ value: newValue, view: newValue === 'apply' ? '' : 'upload' });
     }
     showUploadView = () => {
         this.setState({ view: 'upload' })

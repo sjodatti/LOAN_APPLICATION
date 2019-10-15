@@ -1,3 +1,6 @@
 export default {
-    userData: {}
+    userData: {},
+    loanDetails: {},
+    uploadDetails: {},
+    applicationStatusDetails: {}
 }

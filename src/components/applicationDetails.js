@@ -1,17 +1,8 @@
 import React, { PureComponent } from 'react';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { withRouter } from 'react-router-dom';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
-} from "react-router-dom";
+import { connect } from 'react-redux';
 
 const Styles = (theme => ({
     root: {
@@ -44,21 +35,17 @@ class ApplicationDetails extends PureComponent {
             openAmount: '$20000',
             monthlyRate: '$200'
         }
+        this.key = 0;
     }
     handleChange = (event) => {
         this.setState({
             [event.target.id]: event.target.value
         })
     }
-    registerButtonHandler = () => {
-        const { duration, openAmount, monthlyRate } = this.state;
-        const payload = {
-            duration,
-            openAmount,
-            monthlyRate
-        }
-        console.log(payload);
-        this.props.history.push('/accountSummary')
+    componentWillReceiveProps(newProps) {
+        const { duration, openAmount, monthlyRate } = newProps.applicationStatusDetails;
+        this.setState({ duration, openAmount, monthlyRate });
+        this.key++;
     }
     render() {
         const { classes } = this.props;
@@ -72,9 +59,7 @@ class ApplicationDetails extends PureComponent {
                         defaultValue={duration}
                         className={classes.textField}
                         margin="normal"
-                        InputProps={{
-                            readOnly: true,
-                        }}
+                        key={this.key}
                     />
                 </div>
                 <div>
@@ -84,9 +69,7 @@ class ApplicationDetails extends PureComponent {
                         defaultValue={openAmount}
                         className={classes.textField}
                         margin="normal"
-                        InputProps={{
-                            readOnly: true,
-                        }}
+                        key={this.key}
                     />
                 </div>
                 <div>
@@ -96,9 +79,7 @@ class ApplicationDetails extends PureComponent {
                         defaultValue={monthlyRate}
                         className={classes.textField}
                         margin="normal"
-                        InputProps={{
-                            readOnly: true,
-                        }}
+                        key={this.key}
                     />
                 </div>
             </div>
@@ -106,4 +87,9 @@ class ApplicationDetails extends PureComponent {
     }
 }
 
-export default withStyles(Styles)(withRouter(ApplicationDetails));
+const mapStateToProps = (state) => {
+    return {
+        applicationStatusDetails: state.applicationStatusDetails
+    }
+}
+export default withStyles(Styles)(withRouter(connect(mapStateToProps)(ApplicationDetails)));

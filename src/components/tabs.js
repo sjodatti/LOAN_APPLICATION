@@ -24,19 +24,18 @@ class TabsComp extends PureComponent {
         super(props);
         this.state = {
             value: 'apply',
-            view: '',
-            applicationDetails: {}
+            view: ''
         }
     }
     handleChange = (event, newValue) => {
         this.setState({ value: newValue });
     }
-    showUploadView = (applicationDetails) => {
-        this.setState({ view: 'upload', applicationDetails })
+    showUploadView = () => {
+        this.setState({ view: 'upload' })
     }
     render() {
         const { classes } = this.props;
-        const { value, view, applicationDetails } = this.state;
+        const { value, view } = this.state;
         return (
             <div className={classes.root}>
                 <AppBar position="static">
@@ -51,7 +50,7 @@ class TabsComp extends PureComponent {
                 </AppBar>
                 <TabPanel value={value} index="apply">
                     {view !== 'upload' && <ApplyLoan showUploadView={this.showUploadView} />}
-                    {view === 'upload' && <UploadDocument applicationDetails={applicationDetails} />}
+                    {view === 'upload' && <UploadDocument />}
                 </TabPanel>
                 <TabPanel value={value} index="status">
                     <Status />

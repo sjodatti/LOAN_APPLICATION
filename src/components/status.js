@@ -6,13 +6,13 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Link from '@material-ui/core/Link';
 import Button from '@material-ui/core/Button';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import LoanDetails from './loanDetails';
 import { withRouter } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import ApplicationDetails from './applicationDetails';
+import { connect } from 'react-redux';
+import { getApplicationStatusAction } from '../redux/action/appActions';
 
 const Styles = (theme => ({
     root: {
@@ -47,7 +47,17 @@ class Status extends PureComponent {
         }
     }
     statusButtonHandler = () => {
+        const { applicationId } = this.state;
+        const payload = {
+            applicationId
+        }
+        this.props.dispatch(getApplicationStatusAction(payload));
 
+    }
+    handleChange = (event) => {
+        this.setState({
+            [event.target.id]: event.target.value
+        })
     }
     render() {
         const { classes } = this.props;
@@ -93,4 +103,4 @@ class Status extends PureComponent {
     }
 }
 
-export default withStyles(Styles)(withRouter(Status));
+export default withStyles(Styles)(withRouter(connect()(Status)));

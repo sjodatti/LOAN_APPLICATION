@@ -4,11 +4,9 @@ import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import PersonalDetails from './personalDetails';
-import CorporateDetails from './corporateDetails';
-import LoanDetails from './loanDetails';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { uploadDocumentAction } from '../redux/action/appActions';
 
 const Styles = (theme => ({
     root: {
@@ -45,12 +43,14 @@ class UploadDocument extends PureComponent {
             file: null
         }
     }
-    submitButtonHandler = () => {
-
-    }
     onChangeHandler = event => {
         console.log(event.target.files[0])
         this.setState({ [event.target]: event.target.files[0] });
+    }
+    uploadButtonHandler = () => {
+        var formData = new FormData();
+        formData.append('file', this.state.file);
+        this.props.dispatch(uploadDocumentAction(formData));
     }
     render() {
         const { classes } = this.props;
@@ -65,12 +65,15 @@ class UploadDocument extends PureComponent {
                 </AppBar>
                 <input type="file" id='file' name="file" onChange={this.onChangeHandler} />
                 <Button onClick={this.uploadButtonHandler} variant="contained" className={classes.uploadButton}>Upload</Button>
-                <div>
-                    <Button onClick={this.submitButtonHandler} variant="contained" color="primary" className={classes.button}>Submit</Button>
-                </div>
             </div>
         );
     }
 }
+const mapStateToProps = (state) => {
+    return {
+        loanDetails: state.loanDetails,
+        uploadDetails: state.uploadDetails
+    }
+}
 
-export default withStyles(Styles)(withRouter(UploadDocument));
+export default withStyles(Styles)(withRouter(connect(mapStateToProps)(UploadDocument)));

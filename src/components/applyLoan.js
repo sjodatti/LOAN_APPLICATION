@@ -13,6 +13,8 @@ import PersonalDetails from './personalDetails';
 import CorporateDetails from './corporateDetails';
 import LoanDetails from './loanDetails';
 import { withRouter } from 'react-router-dom';
+import { loanApplicationAction } from '../redux/action/appActions';
+import { connect } from 'react-redux';
 
 const Styles = (theme => ({
     root: {
@@ -50,11 +52,13 @@ class ApplyLoan extends PureComponent {
 
     }
     submitButtonHandler = () => {
-        this.props.showUploadView({
+        const payload = {
             personalDetails: this.personalDetails,
             corporateDetails: this.corporateDetails,
             loanDetails: this.loanDetails
-        });
+        }
+        this.props.dispatch(loanApplicationAction(payload));
+        this.props.showUploadView();
     }
     getPersonalDetails = (personalDetails) => {
         this.personalDetails = personalDetails;
@@ -124,5 +128,9 @@ class ApplyLoan extends PureComponent {
         );
     }
 }
-
-export default withStyles(Styles)(withRouter(ApplyLoan));
+const mapStateToProps = (state) => {
+    return {
+        loanDetails: state.loanDetails
+    }
+}
+export default withStyles(Styles)(withRouter(connect(mapStateToProps)(ApplyLoan)));

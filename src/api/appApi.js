@@ -44,7 +44,7 @@ class appApi extends React.Component {
     }
     static getApplicationStatus(payload) {
         return new Promise((resolve, reject) => {
-            offline ? resolve({ response: "success" }) : fetch(`http://13.235.244.45:7500/v1/loanapplication/status?applicationId=${payload.applicationId}`, {
+            offline ? resolve(applicationStatusDetails) : fetch(`http://13.235.244.45:7500/v1/loanapplication/status?applicationId=${payload.applicationId}`, {
             }).then(response => {
                 resolve(response.json())
             }).catch(error => {

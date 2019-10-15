@@ -18,8 +18,13 @@ class appApi extends React.Component {
     }
     static loanApplication(payload) {
         return new Promise((resolve, reject) => {
-            offline ? resolve({ loanStatus: "Success" }) : fetch('https://example.com', {
-                credentials: 'omit'
+            fetch('http://13.235.244.45:7500/v1/loanapplication', {
+                method: 'POST',
+                body: JSON.stringify(payload),
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
             }).then(response => {
                 resolve(response.json())
             }).catch(error => {
@@ -43,8 +48,7 @@ class appApi extends React.Component {
     }
     static getApplicationStatus(payload) {
         return new Promise((resolve, reject) => {
-            offline ? resolve(applicationStatusDetails) : fetch('https://example.com', {
-                credentials: 'omit'
+            fetch(`http://13.235.244.45:7500/v1/loanapplication/status?applicationId=${payload.applicationId}`, {
             }).then(response => {
                 resolve(response.json())
             }).catch(error => {

@@ -41,24 +41,24 @@ class LoanDetails extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            amount: '',
-            term: '',
-            usage: ''
+            amount: 0,
+            term: 0,
+            puropse: ''
         }
     }
     handleChange = (event) => {
-        const { amount, term, usage } = this.state;
+        const { amount, term, puropse } = this.state;
         this.setState({
             [event.target.id]: event.target.value
         }, this.props.getLoanDetails({
             amount,
             term,
-            usage
+            puropse
         }))
     }
     render() {
         const { classes } = this.props;
-        const { amount, term, usage } = this.state;
+        const { amount, term, puropse } = this.state;
         return (
             <div className={classes.root}>
                 <div>
@@ -83,13 +83,13 @@ class LoanDetails extends PureComponent {
                 </div>
                 <div>
                     <FormControl className={classes.formControl}>
-                        <InputLabel htmlFor="usage-simple">Usage</InputLabel>
+                        <InputLabel htmlFor="puropse-simple">Usage</InputLabel>
                         <Select
-                            value={usage}
+                            value={puropse}
                             onChange={this.handleChange}
                             inputProps={{
-                                name: 'usage',
-                                id: 'usage-simple',
+                                name: 'puropse',
+                                id: 'puropse-simple',
                             }}
                         >
                             <MenuItem value={10}>Current Assets</MenuItem>

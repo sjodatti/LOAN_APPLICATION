@@ -30,102 +30,102 @@ class PersonalDetails extends PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            address: '',
-            citizenship: '',
-            dob: '',
-            phoneNumber: '',
-            email: '',
-            passport: '',
+            representiveName: '',
+            representiveAddress: '',
+            representiveCitizenShip: '',
+            representiveDateOfBirth: '',
+            representivePhoneNumber: '',
+            representiveEmail: '',
+            representivePassportNumber: '',
         }
     }
     handleChange = (event) => {
-        const { name, address, citizenship, dob, phoneNumber, email, passport } = this.state;
+        const { representiveName, representiveAddress, representiveCitizenShip, representiveDateOfBirth, representivePhoneNumber, representiveEmail, representivePassportNumber } = this.state;
         this.setState({
             [event.target.id]: event.target.value
         }, this.props.getPersonalDetails({
-            name,
-            address,
-            citizenship,
-            dob,
-            phoneNumber,
-            email,
-            passport
+            representiveName,
+            representiveAddress,
+            representiveCitizenShip,
+            representiveDateOfBirth,
+            representivePhoneNumber,
+            representiveEmail,
+            representivePassportNumber
 
         }))
 
     }
     render() {
         const { classes } = this.props;
-        const { name, address, citizenship, dob, phoneNumber, email, passport } = this.state;
+        const { representiveName, representiveAddress, representiveCitizenShip, representiveDateOfBirth, representivePhoneNumber, representiveEmail, representivePassportNumber } = this.state;
         return (
             <div className={classes.root}>
                 <div>
                     <TextField
-                        id="name"
-                        label="Name"
+                        id="representiveName"
+                        label="representiveName"
                         className={classes.textField}
-                        value={name}
+                        value={representiveName}
                         onChange={this.handleChange}
                         margin="normal"
                     />
                 </div>
                 <div>
                     <TextField
-                        id="address"
+                        id="representiveAddress"
                         label="Address"
                         className={classes.textField}
-                        value={address}
+                        value={representiveAddress}
                         onChange={this.handleChange}
                         margin="normal"
                     />
                 </div>
                 <div>
                     <TextField
-                        id="citizenship"
+                        id="representiveCitizenShip"
                         label="Citizenship"
                         className={classes.textField}
-                        value={citizenship}
+                        value={representiveCitizenShip}
                         onChange={this.handleChange}
                         margin="normal"
                     />
                 </div>
                 <div>
                     <TextField
-                        id="dob"
+                        id="representiveDateOfBirth"
                         label="DOB"
                         className={classes.textField}
-                        value={dob}
+                        value={representiveDateOfBirth}
                         onChange={this.handleChange}
                         margin="normal"
                     />
                 </div>
                 <div>
                     <TextField
-                        id="phoneNumber"
+                        id="representivePhoneNumber"
                         label="Phone Number"
                         className={classes.textField}
-                        value={phoneNumber}
+                        value={representivePhoneNumber}
                         onChange={this.handleChange}
                         margin="normal"
                     />
                 </div>
                 <div>
                     <TextField
-                        id="email"
+                        id="representiveEmail"
                         label="Email"
                         className={classes.textField}
-                        value={email}
+                        value={representiveEmail}
                         onChange={this.handleChange}
                         margin="normal"
                     />
                 </div>
                 <div>
                     <TextField
-                        id="passport"
+                        id="representivePassportNumber"
                         label="Passport"
                         className={classes.textField}
-                        value={passport}
+                        value={representivePassportNumber}
                         onChange={this.handleChange}
                         margin="normal"
                     />

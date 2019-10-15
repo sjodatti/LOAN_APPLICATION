@@ -32,25 +32,45 @@ class CorporateDetails extends PureComponent {
         this.state = {
             corporateName: '',
             corporateAddress: '',
-            legalStructure: '',
-            revenueOfLastYear: '',
+            corporateLegalStructure: '',
+            corporateRevenueLastYear: '',
+            corporateAge: 0,
+            corporateCurrentDebt: 0,
+            corporateFinancialStatement: '',
         }
     }
     handleChange = (event) => {
-        const { corporateName, corporateAddress, legalStructure, revenueOfLastYear } = this.state;
+        const { corporateName,
+            corporateAddress,
+            corporateLegalStructure,
+            corporateRevenueLastYear,
+            corporateAge,
+            corporateCurrentDebt,
+            corporateFinancialStatement
+        } = this.state;
         this.setState({
             [event.target.id]: event.target.value
         }, this.props.getCorporateDetails({
             corporateName,
             corporateAddress,
-            legalStructure,
-            revenueOfLastYear
+            corporateLegalStructure,
+            corporateRevenueLastYear,
+            corporateAge,
+            corporateCurrentDebt,
+            corporateFinancialStatement
 
         }))
     }
     render() {
         const { classes } = this.props;
-        const { corporateName, corporateAddress, legalStructure, revenueOfLastYear } = this.state;
+        const { corporateName,
+            corporateAddress,
+            corporateLegalStructure,
+            corporateRevenueLastYear,
+            corporateAge,
+            corporateCurrentDebt,
+            corporateFinancialStatement
+        } = this.state;
         return (
             <div className={classes.root}>
                 <div>
@@ -75,20 +95,40 @@ class CorporateDetails extends PureComponent {
                 </div>
                 <div>
                     <TextField
-                        id="legalStructure"
+                        id="corporateLegalStructure"
                         label="Legal Structure"
                         className={classes.textField}
-                        value={legalStructure}
+                        value={corporateLegalStructure}
                         onChange={this.handleChange}
                         margin="normal"
                     />
                 </div>
                 <div>
                     <TextField
-                        id="revenueOfLastYear"
+                        id="corporateRevenueLastYear"
                         label="Revenue Of Last Year"
                         className={classes.textField}
-                        value={revenueOfLastYear}
+                        value={corporateRevenueLastYear}
+                        onChange={this.handleChange}
+                        margin="normal"
+                    />
+                </div>
+                <div>
+                    <TextField
+                        id="corporateAge"
+                        label="Age"
+                        className={classes.textField}
+                        value={corporateAge}
+                        onChange={this.handleChange}
+                        margin="normal"
+                    />
+                </div>
+                <div>
+                    <TextField
+                        id="corporateCurrentDebt"
+                        label="Current Debt"
+                        className={classes.textField}
+                        value={corporateCurrentDebt}
                         onChange={this.handleChange}
                         margin="normal"
                     />

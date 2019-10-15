@@ -84,7 +84,7 @@ class Status extends PureComponent {
                     <label>Status:</label>
                     <label>In Progress</label>
                 </div>
-                <ExpansionPanel>
+                <ExpansionPanel expanded={true}>
                     <ExpansionPanelSummary
                         expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel2a-content"

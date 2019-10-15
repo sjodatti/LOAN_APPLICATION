@@ -53,9 +53,9 @@ class ApplyLoan extends PureComponent {
     }
     submitButtonHandler = () => {
         const payload = {
-            personalDetails: this.personalDetails,
-            corporateDetails: this.corporateDetails,
-            loanDetails: this.loanDetails
+            ...this.personalDetails,
+            ...this.corporateDetails,
+            ...this.loanDetails
         }
         this.props.dispatch(loanApplicationAction(payload));
         this.props.showUploadView();
